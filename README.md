@@ -1,2 +1,2 @@
 # ellipsometry
-From angle dependent psi and delta measurements calculates optical model parameters
+calculates optical model parameters from angle dependent psi and delta measurements 
