@@ -5,10 +5,15 @@ from matplotlib import pyplot as plt
 import os # directory fucntions
 import csv # for reading data
 from lmfit import minimize, Minimizer, Parameters, Parameter, report_fit # fitting algorithms
-
-
+"""---------------------------------
+This script uses scientific computer libraries from open science platform Anaconda.
+It can be downloaded here: https://www.continuum.io/downloads.
+Package "lmfit" used for constrained non-linear fitting can be installed using command line: "conda install -c conda-forge lmfit".
+More info about "lmfit" installation can be found here: https://lmfit.github.io/lmfit-py/installation.html
+---------------------------------"""
 
 # TWO LAYER MODEL
+# equations we will work with are from 'Fujiwara: Spectroscopic ellipsometry'
 
 #            air
 #-------------------------
@@ -18,15 +23,14 @@ from lmfit import minimize, Minimizer, Parameters, Parameter, report_fit # fitti
 
 # Fresnel equations for first interface
 
-def r01_p(N1, theta_0):
 
+def r01_p(N1, theta_0):
     Nti=N1 # = Nt/Ni
     a= Nti**2 * cos(theta_0) - sqrt(Nti**2 - (sin(theta_0))**2)
     b= Nti**2 * cos(theta_0) + sqrt(Nti**2 - (sin(theta_0))**2)
     return a/b
 
 def r01_s(N1, theta_0):
-
     Nti=N1 # = Nt/Ni
     a= cos(theta_0) - sqrt(Nti**2 - (sin(theta_0))**2)
     b= cos(theta_0) + sqrt(Nti**2 - (sin(theta_0))**2)
@@ -42,23 +46,14 @@ plt.cla()
 plt.axis([0,90,0,1])
 plt.plot(rad2deg(angles), data_rp,'b-', label='|rp_1|')
 plt.plot(rad2deg(angles), data_rs,'r-', label='|rs_1|')
-
-
 plt.axhline(0, color='black')
 plt.axvline(0, color='black')
-
 plt.legend()
-plt.show()
+plt.savefig("test_1st_interface.pdf",bbox_inches='tight')
 
-
-# ## Fresnel equations for second interface
-
-
+# Fresnel equations for second interface
 def r12_p(N1, N2, theta_0):
     theta_1 = arccos((1/N1) * sqrt(1 - (1/N1)**2 * (sin(theta_0))**2)) # first interface transmission angle
-    #cos_theta_2 = sqrt(1 - (N1/N2)**2 * (sin(theta_1))**2)
-    #theta_2 = arccos(cos_theta_2)
-    
     Nti=N2/N1 # = Nt/Ni
     a= Nti**2 * cos(theta_1) - sqrt(Nti**2 - (sin(theta_1))**2)
     b= Nti**2 * cos(theta_1) + sqrt(Nti**2 - (sin(theta_1))**2)
@@ -66,7 +61,6 @@ def r12_p(N1, N2, theta_0):
 
 def r12_s(N1, N2, theta_0):
     theta_1 = arccos((1/N1) * sqrt(1 - (1/N1)**2 * (sin(theta_0))**2)) # first interface transmission angle
-
     Nti=N2/N1 # = Nt/Ni
     a= cos(theta_1) - sqrt(Nti**2 - (sin(theta_1))**2)
     b= cos(theta_1) + sqrt(Nti**2 - (sin(theta_1))**2)
@@ -74,7 +68,6 @@ def r12_s(N1, N2, theta_0):
 
 # test plot
 plt.cla()
-
 angles=linspace(deg2rad(0),deg2rad(90),500)
 
 N1_test = 1.0 + 0.0j
@@ -82,12 +75,10 @@ N2_test = 1.46 + 0.0j # test with air/glass interface
 plt.axis([0,90,0,1])
 plt.plot(rad2deg(angles),absolute(r12_p(N1_test,N2_test, angles)),'b-', label='|rp_2|') # we plot absolute value of COMPLEX reflection amplitude
 plt.plot(rad2deg(angles),absolute(r12_s(N1_test,N2_test, angles)),'r-', label='|rs_2|')
-
 plt.legend()
-plt.show()
+plt.savefig("test_2nd_interface.pdf",bbox_inches='tight')
 
-
-# ## Fresnel equations for all layers
+# Fresnel equations for all layers
 
 lambd= 658
 
@@ -112,10 +103,9 @@ plt.axis([0,90,0,1])
 plt.plot(rad2deg(angles),absolute(r012_p(lambd, 10, 1.33, 2.1, angles)),'b-', label='|r012_p|')
 plt.plot(rad2deg(angles),absolute(r012_s(lambd, 10, 1.33, 2.1, angles)),'r-', label='|r012_s|')
 plt.legend(loc='lower left')
-plt.show()
+plt.savefig("test_two_layers.pdf",bbox_inches='tight')
 
-
-## ellipsometric quantities
+# define ellipsometric quantities
 def psi(lamd, d, N1, N2, theta_0):
     rp_abs = absolute(r012_p(lamd, d, N1, N2, theta_0))
     rs_abs = absolute(r012_s(lamd, d, N1, N2, theta_0))
@@ -127,7 +117,7 @@ def delta(lamd, d, N1, N2, theta_0):
     return angle(rp/rs)
 
 
-# Test plots
+# Test plots elispometric quantities
 # test plot psi
 
 #     air
@@ -137,10 +127,8 @@ def delta(lamd, d, N1, N2, theta_0):
 #  N2: Si wafer
 
 plt.cla()
-
 angles=linspace(deg2rad(40),deg2rad(80),500)
 
-#plt.axis([0,90,-1,1])
 N1plot = 1.48 + 0.0j     #SiO2
 N2plot = 3.5 + 0.014j      #Si
 
@@ -153,10 +141,8 @@ plt.ylabel(r'$\psi$ $(^{\circ})$',size=25,rotation=90)
 plt.legend(loc='lower left')
 plt.savefig("psi_thickness.pdf",bbox_inches='tight')
 
-
 """ As the plot shows the biggest difference in functions when measuring thin film thickness is around the "experimental Brewster angle" of the sample. 
 The fit accuracy is therefore largely influenced by the measurements around that point."""
-
 
 # test plot DELTA
 angles=linspace(deg2rad(40),deg2rad(80),500)
@@ -172,6 +158,8 @@ plt.ylabel(r'$\Delta$ $(^{\circ})$',size=25,rotation=90)
 plt.legend(loc='lower left')
 plt.savefig("delta_thickness.pdf",bbox_inches='tight')
 
+################################################################
+################################################################
 
 """ FITTING THE DATA """
 
@@ -208,7 +196,7 @@ deltaerr_data = deltaerr_data/deltaerr_data.max()
 print(psierr_data)
 print(deltaerr_data)
 
-#fit SUBSTRATE -> n1=n2, k1=k2
+# fitting SUBSTRATE: n1=n2, k1=k2
 
 def fcn2min(params, theta_data, data): 
     n1  = params['n1']
