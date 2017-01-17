@@ -8,7 +8,7 @@ from lmfit import minimize, Minimizer, Parameters, Parameter, report_fit # fitti
 """---------------------------------
 This script uses scientific computer libraries from open science platform Anaconda.
 It can be downloaded here: https://www.continuum.io/downloads.
-Package "lmfit" used for constrained non-linear fitting can be installed using command line: "conda install -c conda-forge lmfit".
+Package "lmfit" used for bounded non-linear fitting can be installed using command line: "conda install -c conda-forge lmfit".
 More info about "lmfit" installation can be found here: https://lmfit.github.io/lmfit-py/installation.html
 ---------------------------------"""
 
