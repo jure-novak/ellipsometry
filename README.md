@@ -11,4 +11,4 @@ More info about *lmfit* package installation can be found at https://lmfit.githu
 
 User should first try to run *Test fit from "lmfit" documentation - decaying sine wave.py* to see if everything is working correctly.
 
-For data analysis use either plain Python notebook *Two layer model.py* or Jupyter notebook *Two layer model.ipynb*.
+For data analysis use either plain Python notebook *Two layer model.py* or Jupyter notebook *Two layer model.ipynb*. The Jupyter notebook already contains some sample plots.
