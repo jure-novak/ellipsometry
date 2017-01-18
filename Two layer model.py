@@ -168,7 +168,7 @@ plt.savefig("delta_thickness.pdf",bbox_inches='tight')
 #data import 
 data_import=[] 
 
-file_name = 'LSAT.txt'
+file_name = 'LSAT_test_data.txt' # some test data from LSAT SUBSTRATE
 with open(file_name) as csvfile:
     readCSV = csv.reader(csvfile, delimiter='\t')
     for row in readCSV:
@@ -196,7 +196,7 @@ deltaerr_data = deltaerr_data/deltaerr_data.max()
 print(psierr_data)
 print(deltaerr_data)
 
-# fitting SUBSTRATE: n1=n2, k1=k2
+# fitting LSAT SUBSTRATE: n1=n2, k1=k2 (no thin film layer)
 
 def fcn2min(params, theta_data, data): 
     n1  = params['n1']
