@@ -1,6 +1,6 @@
 # Ellipsometry
 The aim of this project is numerical analysis of a [data set from ellipsometric measurements](https://en.wikipedia.org/wiki/Ellipsometry)
- (psi and delta). It finds optimal fit of a set of parameters of an optical model of the sample using bounded non-linear fitting. Currently it is suitable for analysing measurements taken at one wavelength and multiple angles of incidence. It can be easily modified to perform analysis on data gathered at multiple wavelengths (so called VASE ellipsometry).
+ (psi and delta) in Python. It finds optimal fit of a set of parameters of an optical model of the sample using bounded non-linear fitting. Currently it is suitable for analysing measurements taken at one wavelength and multiple angles of incidence. It can be easily modified to perform analysis on data gathered at multiple wavelengths (so called VASE ellipsometry).
 
 The scripts in this project use scientific computing libraries from open science platform Anaconda.
 It can be downloaded here: https://www.continuum.io/downloads.
