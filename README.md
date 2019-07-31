@@ -1,4 +1,4 @@
-# Ellipsometry
+# Ellipsometry - experimental data fitting
 
 ## Overview
 
