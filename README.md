@@ -12,14 +12,13 @@ Package *lmfit* used for fitting enables quick change of optimization algorithms
 
 ## Setup & Installation
 The scripts in this project use scientific computing libraries from open science platform Anaconda.
-It can be downloaded here: https://www.continuum.io/downloads.
+It can be downloaded [here](https://www.continuum.io/downloads).
 
-**Package *lmfit* is used for bounded non-linear fitting.**
-More info about the package is available at https://lmfit.github.io/lmfit-py/intro.html.
-It can be installed using command line: conda *install -c conda-forge lmfit*.
-More info about *lmfit* package installation can be found at https://lmfit.github.io/lmfit-py/installation.html.
+**Package *[lmfit](https://lmfit.github.io/lmfit-py/intro.html)* is used for bounded non-linear fitting.**
+It can be installed using command line: `conda install -c conda-forge lmfit`.
+More info about *lmfit* package installation can be found [here](https://lmfit.github.io/lmfit-py/installation.html).
 
-User should first try to run *Test fit from "lmfit" documentation - decaying sine wave.py* to see if everything is working correctly.
+User should first run [*decaying sine wave* example](https://lmfit.github.io/lmfit-py/intro.html) from *lmfit* documentation to see if everything is working correctly.
 
 ## Usage
 For data analysis use either plain Python notebook *Two layer model.py* or Jupyter notebook *Two layer model.ipynb*. The Jupyter notebook already contains some sample plots.
